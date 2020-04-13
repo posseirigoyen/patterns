@@ -5,6 +5,7 @@
  */
 package patterns;
 
+import java.util.*;
 import util.TextPatternUtils;
 
 /**
@@ -17,7 +18,8 @@ public class Test {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        TextPatternUtils.mostFrequentPatterns("ACAGATGATACATT", 3);
+        Set<String> test=TextPatternUtils.mostFrequentPatterns("ACATGGGATGATACGGGAC", 3);
+        System.out.println(test);
     }
     
 }
