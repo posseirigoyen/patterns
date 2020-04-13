@@ -27,11 +27,13 @@ public class Combinations{
         
         if (iter<size){
          for (int i=0;i<list.size();i++){
-             LinkedList<T> aux=pass;
+             LinkedList<T> aux=new LinkedList<>();
+             aux.addAll(pass);
              T aux2=list.get(i);
-             if (aux.get(iter)!=aux2){
-             aux.set(iter,aux2);
-             comb.addLast(aux);
+             T aux3=aux.get(iter);
+             if (aux3!=aux2){
+                aux.set(iter,aux2);
+                comb.addLast(aux);
              }
              combaux(list,aux,size,iter+1,comb);
          }
