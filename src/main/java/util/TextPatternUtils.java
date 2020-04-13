@@ -22,9 +22,11 @@ public final class TextPatternUtils {
      * @return the set of most frequent patterns of size k in text.
      */
     public static Set<String> mostFrequentPatterns(final String text, final int k) {
-        String[] dict=new String[]{"A","C","G","T"};
-        LinkedList<String[]> combin;
+        LinkedList<String> dict=new LinkedList<>();
+        dict.add("A");dict.add("C");dict.add("G");dict.add("T");
+        LinkedList<LinkedList<String>> combin;
         combin = Combinations.comb(dict,k);
+        
         
     }
 

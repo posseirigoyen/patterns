@@ -9,26 +9,26 @@ import java.util.*;
  *
  * @author Emi
  */
-public class Combinations {
+public class Combinations{
     //arr es el arreglo que contiene los simbolos posibles, size es el tamaño de "palabra"
-    public static LinkedList<Object[]> comb (Object[] arr,int size){
-        LinkedList<Object[]> comb=new LinkedList<>();
-        Object[] newarr=new Object[size];
-        for (int i=0;i<newarr.length;i++){
-                newarr[i]=arr[0];
+    public static <T> LinkedList<LinkedList<T>> comb (LinkedList<T> list,int size){
+        LinkedList<LinkedList<T>> comb=new LinkedList<>();
+        LinkedList<T> newlist=new LinkedList<>();
+        for (int i=0;i<list.size();i++){
+                newlist.add(list.getFirst());
              } 
-        return combaux(arr,newarr,size,0,comb);
+        return combaux(list,newlist,size,0,comb);
     }
     
     //pass e iter son componentes recursivos, comb es la lista de las combinaciones
-    private static LinkedList<Object[]> combaux (Object[] arr,Object[] pass,int size,int iter,LinkedList<Object[]> comb){
+    private static <T> LinkedList<LinkedList<T>> combaux (LinkedList<T> list,LinkedList<T> pass,int size,int iter,LinkedList<LinkedList<T>> comb){
         
         if (iter!=size){
-         for (int i=0;i<arr.length;i++){
-             Object[] aux=pass;
-             aux[iter]=arr[i];
+         for (int i=0;i<list.size();i++){
+             LinkedList<T> aux=pass;
+             aux.set(iter,list.get(i));
              comb.add(aux);
-             combaux(arr,aux,size,iter++,comb);
+             combaux(list,aux,size,iter++,comb);
          }
         }
         return comb;
