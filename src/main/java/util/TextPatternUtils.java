@@ -22,35 +22,36 @@ public final class TextPatternUtils {
      * @return the set of most frequent patterns of size k in text.
      */
     public static Set<String> mostFrequentPatterns(final String text, final int k){
-
+        
         Set<String> set=new HashSet<>();
         if (k<0){
             throw new IllegalArgumentException("k debe ser positivo");
         }
+        
         if (text==null){
             throw new IllegalArgumentException("no puede ser texto nulo");
         }
-        if (text.length()==0 || k==0){
+        
+        if (text.length()==0 || k==0 || text.length()<k){
             set.add("");
             return set;
         }
-        if (text.length()<k){
-            return set;
-        }
+        
+        //dict es mi "diccionario" de posibles simbolos, en este caso A C G T
         LinkedList<String> dict=new LinkedList<>();
         dict.add("A");dict.add("C");dict.add("G");dict.add("T");
-        LinkedList<LinkedList<String>> combin;
-        combin = Permutations.permutationsWithReplacement(dict,k);  
+        LinkedList<LinkedList<String>> perms;
+        perms = Permutations.permutationsWithReplacement(dict,k);  
         int maxcount=0;
-        for (int i=0;i<combin.size();i++){
-            int count=patternCount(text,combin.get(i));
+        
+        for (int i=0;i<perms.size();i++){
+            int count=patternCount(text,perms.get(i));
             if (count==maxcount){
-                //set.add(combin.get(i).toString());
-                set.add(listToString(combin.get(i)));
+                set.add(listToString(perms.get(i)));
             }
             if (count>maxcount){
                 set.clear();
-                set.add(listToString(combin.get(i)));
+                set.add(listToString(perms.get(i)));
                 maxcount=count;
             }
         }
