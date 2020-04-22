@@ -18,7 +18,7 @@ public class Test {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Set<String> test=TextPatternUtils.mostFrequentPatterns("AAGTAAGACCCACTGATCAC", 3);
+        Set<String> test=TextPatternUtils.mostFrequentPatterns("ACGTTGCATGTCGCATGATGCATGAGAGCT", 4);
         System.out.println(test);
     }
     

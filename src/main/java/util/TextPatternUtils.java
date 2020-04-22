@@ -34,15 +34,24 @@ public final class TextPatternUtils {
         for (int i=0;i<combin.size();i++){
             int count=patternCount(text,combin.get(i));
             if (count==maxcount){
-                set.add(combin.get(i).toString());
+                //set.add(combin.get(i).toString());
+                set.add(linkedstring(combin.get(i)));
             }
             if (count>maxcount){
                 set.clear();
-                set.add(combin.get(i).toString());
+                set.add(linkedstring(combin.get(i)));
                 maxcount=count;
             }
         }
         return set;
+    }
+    
+    private static String linkedstring(LinkedList<String> list){
+        String aux="";
+        for (int i=0;i<list.size();i++){
+            aux=aux.concat(list.get(i));
+        }
+        return aux;
     }
     
     private static int patternCount(String text, LinkedList<String> pattern){
