@@ -78,20 +78,28 @@ public final class TextPatternUtils {
         int patsize=pattern.size();
         int count=0;
         int aux=1;
+        //va hasta size-patsize, porque no es necesario analizar todo el texto si ya se que no me quedan suficientes 
+        //caracteres para contener el patron
         for (int i=0;i<=size-patsize;i++){
+            //como charAt me devuelve character y no string, lo paso de nuevo a string
             String a=Character.toString(text.charAt(i));
             String b=pattern.get(0);
+            //si encuentra en el texto la misma letra con la que empieza el patron, chequea de a una las proximas letras
+            //si encuentra todas, el patron esta, y aumenta la cuenta.
+            //como ya se que el patron esta, salto patsize-1 letras adelante. de esta forma no me cuenta dos veces si hay un patron superpuesto con otro igual
             if (a.equals(b)){
                     aux=0;
                     for (int j=i+1;j<i+patsize;j++){
                       String c=Character.toString(text.charAt(j));
                          String d=pattern.get(j-i);
                          if (!(c.equals(d))){
+                          //si una de las letras que siguen no es la correspondiente del patron, aux me lo indica
                           aux=1; 
                           break;
                          }      
                     }
                 }
+            //solo aumenta cuenta y cambia el i si el patron estuvo, es decir si aux es 0
                 if (aux==0){
                     count++;
                     i=i+patsize-1;
