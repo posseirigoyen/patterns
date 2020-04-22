@@ -40,24 +40,24 @@ public final class TextPatternUtils {
         LinkedList<String> dict=new LinkedList<>();
         dict.add("A");dict.add("C");dict.add("G");dict.add("T");
         LinkedList<LinkedList<String>> combin;
-        combin = Combinations.comb(dict,k);  
+        combin = Permutations.permutationsWithReplacement(dict,k);  
         int maxcount=0;
         for (int i=0;i<combin.size();i++){
             int count=patternCount(text,combin.get(i));
             if (count==maxcount){
                 //set.add(combin.get(i).toString());
-                set.add(linkedstring(combin.get(i)));
+                set.add(listToString(combin.get(i)));
             }
             if (count>maxcount){
                 set.clear();
-                set.add(linkedstring(combin.get(i)));
+                set.add(listToString(combin.get(i)));
                 maxcount=count;
             }
         }
         return set;
     }
     
-    private static String linkedstring(LinkedList<String> list){
+    private static String listToString(LinkedList<String> list){
         String aux="";
         for (int i=0;i<list.size();i++){
             aux=aux.concat(list.get(i));
