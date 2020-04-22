@@ -40,15 +40,21 @@ public final class TextPatternUtils {
         //dict es mi "diccionario" de posibles simbolos, en este caso A C G T
         LinkedList<String> dict=new LinkedList<>();
         dict.add("A");dict.add("C");dict.add("G");dict.add("T");
+        //perms va a tener todas las permutaciones posibles de los 4 simbolos
         LinkedList<LinkedList<String>> perms;
         perms = Permutations.permutationsWithReplacement(dict,k);  
+        //maxcount lleva la cuenta de cual es la permutacion con mas apariciones.
         int maxcount=0;
         
         for (int i=0;i<perms.size();i++){
             int count=patternCount(text,perms.get(i));
+            //si el patron analizado no tiene mas apariciones que el que tuvo mas, no cambia nada
+            //si tiene misma cantidad que el que tuvo mas, lo agrega al set de patrones con mas apariciones
             if (count==maxcount){
                 set.add(listToString(perms.get(i)));
             }
+            //si el patron analizado aparece mas veces que maxcount, debo actualizar set, borrando lo que tenia
+            //y añadiendo mi nuevo patron. Luego actualizo maxcount a la nueva cuenta maxima de apariciones.
             if (count>maxcount){
                 set.clear();
                 set.add(listToString(perms.get(i)));
@@ -58,6 +64,7 @@ public final class TextPatternUtils {
         return set;
     }
     
+    //metodo para pasar de una linkedlist de strings a una string sola
     private static String listToString(LinkedList<String> list){
         String aux="";
         for (int i=0;i<list.size();i++){
@@ -65,7 +72,7 @@ public final class TextPatternUtils {
         }
         return aux;
     }
-    
+    //metodo que cuenta numero de apariciones de un patron en un texto
     private static int patternCount(String text, LinkedList<String> pattern){
         int size=text.length();
         int patsize=pattern.size();
@@ -87,19 +94,11 @@ public final class TextPatternUtils {
                 }
                 if (aux==0){
                     count++;
-                    i=i+2;
+                    i=i+patsize-1;
                 }
                 aux=1;
             }
         
         return count;
-    }
-    
-    private String toString(LinkedList<String> list){
-        String str=list.get(0);
-        for (int i=1;i<list.size();i++){
-            str.concat(list.get(i));
-        }
-        return str;
     }
 }
