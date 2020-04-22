@@ -100,7 +100,7 @@ public final class TextPatternUtilsTest {
      * Tests mostFrequentPatterns on simple text, two outputs.
      */
     @Test(timeout=10000)
-    public final void testMostFrequentWordsBiggerInput() throws IOException {      
+    public final void testMostFrequentWordsBiggerInput() throws IOException {       
         String[] lines = IOUtils.toString(
                 this.getClass().getResourceAsStream("dataset_2_10.txt"),
                 "UTF-8"
